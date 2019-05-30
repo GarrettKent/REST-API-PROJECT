@@ -50,7 +50,6 @@ app.use((err, req, res, next) => {
   if (enableGlobalErrorLogging) {
     console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
   }
-
   res.status(err.status || 500).json({
     message: err.message, 
     error: {},
@@ -62,5 +61,5 @@ const port = process.env.PORT || 5000;
 
 // start listening on our port
 app.listen(port, () => {
-  console.log(`Server is running on localhost:${port}`)
+  console.log(`Running on localhost:${port}`)
 });

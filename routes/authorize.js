@@ -6,8 +6,7 @@ const {User} = require('../models');
  
 module.exports = (req, res, next) => {
     //Holds error messages
-    let message = null;
-     
+    let message = null;     
     const credentials = auth(req);
     if (credentials) {
        
@@ -23,12 +22,12 @@ module.exports = (req, res, next) => {
                     next();
                 } else {
                     //if passwords don't match, no access to routes
-                    message= "Incorrect password";
+                    message= 'Incorrect password';
                     res.json({ message: message });
                     res.status(401);
                 }
             } else {
-                message= "Incorrect email";
+                message= 'Incorrect email';
                 res.json({ message: message });
                 res.status(401);
             }

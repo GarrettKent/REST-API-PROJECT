@@ -1,29 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const {Course} = require("../models");
-const {User} = require("../models");
 const authorize = require('./authorize');
+const {Course} = require('../models');
+const {User} = require('../models');
 
 //Using GET, retreive the list of courses and filters out createdAt and updatedAt
 router.get('/', (req, res, next) => {
     Course.findAll({
         attributes: [
-            "id",
-            "title",
-            "description",
-            "estimatedTime",
-            "materialsNeeded",
-            "userId"
+            'id',
+            'title',
+            'description',
+            'estimatedTime',
+            'materialsNeeded',
+            'userId'
       ],
 
       include: [
         {
           model: User,
           attributes: [
-              "id", 
-              "firstName", 
-              "lastName", 
-              "emailAddress"]
+              'id', 
+              'firstName', 
+              'lastName', 
+              'emailAddress']
         }
       ]
     }).then(courses => {
@@ -44,21 +44,21 @@ router.get('/:id', (req, res, next) => {
             id: req.params.id
         },
         attributes: [
-            "id",
-            "title",
-            "description",
-            "estimatedTime",
-            "materialsNeeded",
-            "userId"
+            'id',
+            'title',
+            'description',
+            'estimatedTime',
+            'materialsNeeded',
+            'userId'
       ],
       include: [
         {
           model: User,
           attributes: [
-              "id", 
-              "firstName", 
-              "lastName", 
-              "emailAddress"
+              'id', 
+              'firstName', 
+              'lastName', 
+              'emailAddress'
             ]
         }
       ]
@@ -95,8 +95,8 @@ router.post("/", authorize, (req, res, next) => {
                     res.status(201).end();
                 })
                 .catch (err => {
-                    if (err.name == "SequelizeValidationError") {
-                        err.message = "All data must be entered";
+                    if (err.name == 'SequelizeValidationError') {
+                        err.message = 'All data must be entered';
                         err.status = 400;
                         next(err); 
                     } else {
@@ -139,8 +139,8 @@ router.put('/:id', authorize, (req, res, next) => {
             res.status(204).end();
         })
         .catch(err => {
-            if (err.name === "SequelizeValidationError") {
-                err.message = "Enter all information";
+            if (err.name === 'SequelizeValidationError') {
+                err.message = 'Enter all information';
                 err.status = 400;
                 next(err);
             } else {
@@ -172,8 +172,8 @@ router.delete('/:id', authorize, (req, res, next) => {
         }
     }) 
     .catch(err => {
-        if (err.name === "SequelizeValidationError") {
-            err.message = "Enter all information";
+        if (err.name === 'SequelizeValidationError') {
+            err.message = 'Enter all information';
             err.status = 400;
             next(err);
         } else {
